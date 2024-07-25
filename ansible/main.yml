@@ -1,0 +1,9 @@
+---
+## Deploy the whole containerzied nginx webserver and check security
+
+- hosts: all
+  roles:
+    - firewall
+    - docker
+    - nginx_container
+    - security_check

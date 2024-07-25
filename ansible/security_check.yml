@@ -1,0 +1,7 @@
+---
+## Check the security
+
+- hosts: all
+  roles:
+    - firewall
+    - security_check

@@ -1,0 +1,62 @@
+---
+# This role contains plays for managing the firewall
+
+- name: Allow ssh for ansible in iptables
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    source: "{{ ansible_facts['env']['SSH_CONNECTION'] | split | first }}"
+    destination_port: 22
+    jump: ACCEPT
+  become: yes
+
+- name: Allow loopback
+  iptables:
+    chain: INPUT
+    ctstate: ESTABLISHED,RELATED
+    jump: ACCEPT
+  become: yes
+
+- name: Allow related and established connections
+  iptables:
+    chain: INPUT
+    in_interface: lo
+    jump: ACCEPT
+  become: yes
+
+- name: Set INPUT to DROP
+  iptables:
+    chain: INPUT
+    policy: DROP      
+  become: yes
+
+- name: Set webserver access
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    source: "{{ web_access_from }}"
+    destination_port: 80
+    jump: ACCEPT
+  become: yes
+  tags:
+    - config
+
+- name: Set ssh access
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    source: "{{ ssh_access_from }}"
+    destination_port: 22
+    jump: ACCEPT
+  become: yes
+  tags:
+    - config
+
+#- name: Set local webserver access
+#  iptables:
+#    chain: INPUT
+#    protocol: tcp
+#    source: "127.0.0.1"
+#    destination_port: 80
+#    jump: ACCEPT
+#  become: yes

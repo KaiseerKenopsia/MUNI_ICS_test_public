@@ -1,0 +1,43 @@
+---
+# This role contains tasks for managing a nginx docker container
+
+- name: Make directories for Nginx volumes
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+  loop:
+    - /etc/containers/nginx
+    - /var/containers/nginx/www
+  become: yes
+
+- name: Check if nginx config exists
+  stat:
+    path: /etc/containers/nginx/nginx.conf
+  register: nginx_conf
+  become: yes
+
+- name: Copy default nginx config if there is none
+  command: "docker run --rm -v /etc/containers/nginx:/nginx-config/nginx nginx:mainline cp -r /etc/nginx /nginx-config"
+  when: not nginx_conf.stat.exists
+  become: yes
+
+- name: Create/Update an Nginx container in Docker
+  community.docker.docker_container:
+    name: nginx_webserver
+    image: docker.io/nginx:mainline
+    volumes:
+      - "/etc/containers/nginx:/etc/nginx"
+      - "/var/containers/nginx/www:/usr/share/nginx/html"
+    ports:
+      - "80:80"
+  become: yes
+  tags:
+    - update
+    - container
+
+
+#- name: Configure Nginx container
+#  template: ...
+

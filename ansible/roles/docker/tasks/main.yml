@@ -1,0 +1,19 @@
+---
+# This role contains tasks for managing docker
+
+- name: Install docker
+  apt:
+    name: docker.io
+    state: present
+  tags:
+    - install
+  become: yes
+
+- name: Update docker
+  apt:
+    name: docker.io
+    state: latest
+  tags:
+    - update
+    - never
+  become: yes

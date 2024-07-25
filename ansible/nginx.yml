@@ -1,0 +1,7 @@
+---
+## Deploy the webserver and manage cofigurations
+
+- hosts: all
+  roles:
+    - firewall
+      #- nginx_container

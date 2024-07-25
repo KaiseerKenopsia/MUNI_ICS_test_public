@@ -1,0 +1,7 @@
+---
+# Handlers for security_check
+
+- name: restart sshd
+  service:
+    name: ssh
+    state: restarted
