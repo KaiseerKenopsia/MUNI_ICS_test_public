@@ -45,9 +45,9 @@
   loop: "{{ conf_lines | dict2items }}"
   vars:
     conf_lines:
-      "PermitRootLogin no": "^#?PermitRootLogin" 
-      "PasswordAuthentication no": "^#?PasswordAuthentication" 
-      "PubkeyAuthentication yes": "^#?PubkeyAuthentication" 
+      "PermitRootLogin no": "^\ *#?\ *PermitRootLogin" 
+      "PasswordAuthentication no": "^\ *#?\ *PasswordAuthentication" 
+      "PubkeyAuthentication yes": "^\ *#?\ *PubkeyAuthentication" 
   become: yes
   notify:
     - restart sshd
