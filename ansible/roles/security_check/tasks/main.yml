@@ -1,36 +1,36 @@
 ---
 # This role contains tasks for checking security on target server
 
-- name: Check for PermitRootLogin no
+- name: Check for 'PermitRootLogin no' in sshd_config
   command: grep -q '^PermitRootLogin no' /etc/ssh/sshd_config
   register: permit_root_login
   ignore_errors: true
 
-- name: Check for PasswordAuthentication no
+- name: Check for 'PasswordAuthentication no' in sshd_config
   command: grep -q '^PasswordAuthentication no' /etc/ssh/sshd_config
   register: password_authentication
   ignore_errors: true
 
-- name: Check for PubkeyAuthentication yes
+- name: Check for 'PubkeyAuthentication yes' in sshd_config
   command: grep -q '^PubkeyAuthentication yes' /etc/ssh/sshd_config
   register: pubkey_authentication
   ignore_errors: true
 
-- name: Warn if PermitRootLogin no is not found
+- name: Warn if 'PermitRootLogin no' is not found
   debug:
     msg:
       - " -----------------------------------------  W A R N I N G  --------------------------------------------- "
       - "'PermitRootLogin no' is not set in /etc/ssh/sshd_config, play this role with tag 'harden' to add the line"
   when: permit_root_login.rc != 0
 
-- name: Warn if PasswordAuthentication no is not found
+- name: Warn if 'PasswordAuthentication no' is not found
   debug:
     msg:
       - " ----------------------------------------------  W A R N I N G  ----------------------------------------------- "
       - "'PasswordAuthentication no' is not set in /etc/ssh/sshd_config, play this role with tag 'harden' to add the line"
   when: password_authentication.rc != 0
 
-- name: Warn if PubkeyAuthentication yes is not found
+- name: Warn if 'PubkeyAuthentication yes' is not found
   debug:
     msg:
       - " ----------------------------------------------  W A R N I N G  ---------------------------------------------- "
