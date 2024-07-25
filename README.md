@@ -80,10 +80,12 @@ echo "10.0.0.42" >> inventory
 ansible-playbook main.yml
 ```
 
-Additionally, tags 'install', 'update', and 'harden' are available.
-  - install - installs Docker
+Additionally, tags some tags are available:
+  - install - Installs Docker
   - update - Updates Docker and Nginx container image
   - harden - Hardens security configuration instead of just warning about it
+  - container - Updates the image to the latest nginx version and makes sure the container is running
+  - config - Updates configurations, so far only for firewall access, nothing else needs to be in a var
 
 Tags can be used like this:
 ```
