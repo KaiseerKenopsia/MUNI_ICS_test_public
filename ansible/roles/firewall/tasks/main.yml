@@ -10,14 +10,14 @@
     jump: ACCEPT
   become: yes
 
-- name: Allow loopback
+- name: Allow related and established connections
   iptables:
     chain: INPUT
     ctstate: ESTABLISHED,RELATED
     jump: ACCEPT
   become: yes
 
-- name: Allow related and established connections
+- name: Allow loopback
   iptables:
     chain: INPUT
     in_interface: lo
