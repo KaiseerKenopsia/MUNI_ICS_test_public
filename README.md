@@ -52,6 +52,7 @@ ssh <your user>@<host address>
 The key is located in `~/.ssh/authorized_keys` there may already be your other keys here, so make sure to move/copy the correct (usually the last) one.
 
 Place the public key into `/home/ansible/.ssh/authorized_keys` (create the file and directories if there are none)
+
 Make sure the permissions are correct:
 ```
 sudo chown ansible:ansible /home/ansible/.ssh /home/ansible/.ssh/authorized_keys
