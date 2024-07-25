@@ -4,4 +4,4 @@
 - hosts: all
   roles:
     - firewall
-      #- nginx_container
+    - nginx_container
