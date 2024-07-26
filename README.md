@@ -87,11 +87,14 @@ Additionally, tags some tags are available:
   - container - Updates the image to the latest nginx version and makes sure the container is running
   - config - Updates configurations, so far only for firewall access, nothing else needs to be in a var
 
-## Container volumes
-
-The nginx configuration on target machine is located on `/etc/containers/nginx`
-and the webserver root folder is in `/var/containers/nginx/www`
 Tags can be used like this:
 ```
 ansible-playbook main.yml --tags update
 ```
+
+
+## Container volumes
+
+The nginx configuration on target machine is located on `/etc/containers/nginx`
+
+and the webserver root folder is in `/var/containers/nginx/www`
