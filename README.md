@@ -69,7 +69,7 @@ git clone git@github.com:KaiseerKenopsia/MUNI_ICS_test_public.git
 cd ansible
 ```
 
-#### 2. Put your target machine IP or hostname into a file named 'inventory' in the ansible folder
+#### 2. Put your target machine IP or hostname into a file named `inventory` in the ansible folder
 ```
 echo "[example servers]" >> inventory
 echo "10.0.0.42" >> inventory
@@ -87,6 +87,10 @@ Additionally, tags some tags are available:
   - container - Updates the image to the latest nginx version and makes sure the container is running
   - config - Updates configurations, so far only for firewall access, nothing else needs to be in a var
 
+## Container volumes
+
+The nginx configuration on target machine is located on `/etc/containers/nginx`
+and the webserver root folder is in `/var/containers/nginx/www`
 Tags can be used like this:
 ```
 ansible-playbook main.yml --tags update
